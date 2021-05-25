@@ -1,4 +1,4 @@
-FROM fedora:latest as builder
+FROM quay.io/fedora/fedora:34-x86_64 as builder
 RUN dnf -y install dnf-plugins-core
 RUN dnf -y download --source kiwix-tools
 RUN rpm -ivh ./kiwix-tools*
@@ -28,7 +28,7 @@ RUN dnf -y install /root/rpmbuild/RPMS/x86_64/kiwix-lib-devel-10* \
                    /root/rpmbuild/RPMS/x86_64/kiwix-lib-10*
 RUN rpmbuild -bb kiwix-tools.spec
 
-FROM fedora:latest
+FROM quay.io/fedora/fedora:34-x86_64
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/kiwix-lib-10* .
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/kiwix-tools-3* .
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/zimlib-7* .

@@ -33,7 +33,7 @@ COPY --from=builder /root/rpmbuild/RPMS/x86_64/kiwix-lib-10* .
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/kiwix-tools-3* .
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/zimlib-7* .
 RUN dnf -y install ./*.rpm wget && dnf clean all
-EXPOSE map[80/tcp:{}]
+EXPOSE 80
 VOLUME [/data]
 WORKDIR /data
 COPY ./start.sh /usr/local/bin/

@@ -1,0 +1,76 @@
+From dc6338a0f5bb75fa52cef8c29e4c0be5e171887e Mon Sep 17 00:00:00 2001
+From: Maneesh P M <manu.pm55@gmail.com>
+Date: Mon, 24 May 2021 10:24:31 +0530
+Subject: [PATCH] Update libkiwix with search iterator rename in libzim
+
+Search iterator API in libzim has been shifted to use camel case naming.
+This has to be accomodated in libkiwix as well.
+---
+ src/reader.cpp   |  6 +++---
+ src/searcher.cpp | 14 +++++++-------
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/src/reader.cpp b/src/reader.cpp
+index 07c2b32c..1abc9ead 100644
+--- a/src/reader.cpp
++++ b/src/reader.cpp
+@@ -507,9 +507,9 @@ bool Reader::searchSuggestionsSmart(const string& prefix,
+          current != suggestions.end();
+          current++) {
+       std::vector<std::string> suggestion;
+-      suggestion.push_back(current->getTitle());
+-      suggestion.push_back(current->getPath());
+-      suggestion.push_back(kiwix::normalize(current->getTitle()));
++      suggestion.push_back(current.getTitle());
++      suggestion.push_back(current.getPath());
++      suggestion.push_back(kiwix::normalize(current.getTitle()));
+       results.push_back(suggestion);
+     }
+     retVal = true;
+diff --git a/src/searcher.cpp b/src/searcher.cpp
+index 6fa861d6..65f6f25f 100644
+--- a/src/searcher.cpp
++++ b/src/searcher.cpp
+@@ -235,19 +235,19 @@ _Result::_Result(zim::SearchResultSet::iterator iterator)
+ 
+ std::string _Result::get_url()
+ {
+-  return iterator.get_path();
++  return iterator.getPath();
+ }
+ std::string _Result::get_title()
+ {
+-  return iterator.get_title();
++  return iterator.getTitle();
+ }
+ int _Result::get_score()
+ {
+-  return iterator.get_score();
++  return iterator.getScore();
+ }
+ std::string _Result::get_snippet()
+ {
+-  return iterator.get_snippet();
++  return iterator.getSnippet();
+ }
+ std::string _Result::get_content()
+ {
+@@ -255,15 +255,15 @@ std::string _Result::get_content()
+ }
+ int _Result::get_size()
+ {
+-  return iterator.get_size();
++  return iterator.getSize();
+ }
+ int _Result::get_wordCount()
+ {
+-  return iterator.get_wordCount();
++  return iterator.getWordCount();
+ }
+ int _Result::get_readerIndex()
+ {
+-  return iterator.get_fileIndex();
++  return iterator.getFileIndex();
+ }
+ 
+ 

@@ -35,7 +35,7 @@ FROM quay.io/fedora/fedora:34-x86_64
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/kiwix-lib-10* .
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/kiwix-tools-3* .
 COPY --from=builder /root/rpmbuild/RPMS/x86_64/zimlib-7* .
-RUN dnf -y install ./*.rpm wget && dnf clean all
+RUN dnf -y install ./*.rpm wget && dnf -y update && dnf clean all
 EXPOSE 80
 VOLUME [/data]
 WORKDIR /data

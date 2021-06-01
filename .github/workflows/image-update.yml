@@ -1,0 +1,24 @@
+name: Image Update
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+env:
+  IMAGE_NAME: quay.io/jmontleon/fedora-kwix-server
+  VERSION: latest
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME:$VERSION
+
+      - name: Log into registry
+        run: echo "${{ secrets.QUAY_ROBOT }}" | docker login quay.io -u ${{ secrets.QUAY_TOKEN }} --password-stdin
+
+      - name: Push image
+        run: |
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION

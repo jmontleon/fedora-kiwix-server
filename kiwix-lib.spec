@@ -7,7 +7,6 @@ Summary: Common code base for all Kiwix ports
 
 URL: https://github.com/kiwix/%{name}
 Source0: %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0: 537.patch
 
 BuildRequires: libmicrohttpd-devel
 BuildRequires: mustache-devel

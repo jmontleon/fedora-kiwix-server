@@ -4,7 +4,6 @@ RUN dnf -y download --source kiwix-tools
 RUN rpm -ivh ./kiwix-tools*
 ADD zimlib.spec /root/rpmbuild/SPECS/zimlib.spec
 ADD kiwix-lib.spec /root/rpmbuild/SPECS/kiwix-lib.spec
-ADD 537.patch /root/rpmbuild/SOURCES/537.patch
 RUN dnf build-dep -y /root/rpmbuild/SPECS/zimlib.spec \
                      /root/rpmbuild/SPECS/kiwix-lib.spec \
                      /root/rpmbuild/SPECS/kiwix-tools.spec
@@ -18,6 +17,10 @@ RUN wget https://github.com/kiwix/libkiwix/archive/refs/heads/master.zip
 RUN unzip master.zip && rm -f master.zip
 RUN mv libkiwix-master kiwix-lib-10.0.0
 RUN tar zcvf kiwix-lib-10.0.0.tar.gz kiwix-lib-10.0.0
+RUN wget https://github.com/kiwix/kiwix-tools/archive/refs/heads/master.zip
+RUN unzip master.zip && rm -f master.zip
+RUN mv kiwix-tools-master kiwix-tools-3.1.2
+RUN tar zcvf kiwix-tools-3.1.2.tar.gz kiwix-tools-3.1.2
 WORKDIR /root/rpmbuild/SPECS
 RUN rpmbuild -bb zimlib.spec
 RUN dnf -y install /root/rpmbuild/RPMS/x86_64/zimlib-devel-7* \

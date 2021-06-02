@@ -9,8 +9,7 @@ env:
   VERSION: latest
 jobs:
   push:
-    environment:
-      name: QUAY_ROBOT
+    environment: QUAY_ROBOT
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,9 +18,7 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME:$VERSION
 
       - name: Log into registry
-        run: echo "${{ secrets.QUAY_ROBOT }}" | docker login quay.io -u ${{ secrets.QUAY_TOKEN }} --password-stdin
+        run: echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_ROBOT }} --password-stdin
 
       - name: Push image
-        run: |
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+        run: docker push $IMAGE_ID:$VERSION

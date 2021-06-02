@@ -3,7 +3,7 @@ name: Image Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "5 15 * * *"
+    - cron: "15 5 * * *"
 env:
   IMAGE_NAME: quay.io/jmontleon/fedora-kwix-server
   VERSION: latest

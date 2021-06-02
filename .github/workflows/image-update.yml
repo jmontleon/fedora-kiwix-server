@@ -21,4 +21,4 @@ jobs:
         run: echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_ROBOT }} --password-stdin
 
       - name: Push image
-        run: docker push $IMAGE_ID:$VERSION
+        run: docker push $IMAGE_NAME:$VERSION

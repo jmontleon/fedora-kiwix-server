@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: "15 23 * * *"
 env:
-  IMAGE_NAME: quay.io/jmontleon/fedora-kwix-server
+  IMAGE_NAME: quay.io/jmontleon/fedora-kiwix-server
   VERSION: latest
 jobs:
   push:

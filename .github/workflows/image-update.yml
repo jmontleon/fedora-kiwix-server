@@ -8,6 +8,8 @@ env:
   IMAGE_NAME: quay.io/jmontleon/fedora-kwix-server
   VERSION: latest
 jobs:
+  environment:
+    name: QUAY_ROBOT
   push:
     runs-on: ubuntu-latest
     steps:

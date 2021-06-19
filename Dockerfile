@@ -9,9 +9,9 @@ RUN dnf build-dep -y /root/rpmbuild/SPECS/zimlib.spec \
                      /root/rpmbuild/SPECS/kiwix-tools.spec
 RUN dnf -y install wget rpm-build
 WORKDIR /root/rpmbuild/SOURCES
-RUN wget https://github.com/openzim/libzim/archive/refs/heads/master.zip
-RUN unzip master.zip && rm -f master.zip
-RUN mv libzim-master libzim-7.0.0
+RUN wget https://github.com/openzim/libzim/archive/95e2d2d745df3ac3a76b19600e23a4e96584a626.zip
+RUN unzip 95e2d2d745df3ac3a76b19600e23a4e96584a626.zip && rm -f 95e2d2d745df3ac3a76b19600e23a4e96584a626.zip
+RUN mv libzim-95e2d2d745df3ac3a76b19600e23a4e96584a626 libzim-7.0.0
 RUN tar zcvf 7.0.0.tar.gz libzim-7.0.0
 RUN wget https://github.com/kiwix/libkiwix/archive/refs/heads/master.zip
 RUN unzip master.zip && rm -f master.zip

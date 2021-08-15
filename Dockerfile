@@ -16,8 +16,6 @@ RUN tar zcvf 7.0.0.tar.gz libzim-7.0.0
 RUN wget https://github.com/kiwix/libkiwix/archive/refs/heads/master.zip
 RUN unzip master.zip && rm -f master.zip
 RUN mv libkiwix-master kiwix-lib-10.0.0
-ADD search.patch /root/rpmbuild/SOURCES/kiwix-lib-10.0.0/search.patch
-RUN pushd kiwix-lib-10.0.0 && patch -p1 < search.patch && popd
 RUN tar zcvf kiwix-lib-10.0.0.tar.gz kiwix-lib-10.0.0
 RUN wget https://github.com/kiwix/kiwix-tools/archive/refs/heads/master.zip
 RUN unzip master.zip && rm -f master.zip
